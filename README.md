@@ -11,6 +11,10 @@ Used by [SimPrinter](https://github.com/matsan000/SimPrinter) and
 Flight Simulator. This extension has no dependency on either beyond talking to their local
 servers - it doesn't require both to be running, just whichever one you're sending to.
 
+<p>
+  <img src="assets/extension-send-to.png" width="420" alt="Send to: SimPrinter / SimCallouts choice on SimBrief's Takeoff Performance calculator">
+</p>
+
 ## How it works
 
 SimPrinter can run a small localhost-only server (`127.0.0.1:39901`) when "Allow the
