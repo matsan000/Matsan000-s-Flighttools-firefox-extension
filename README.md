@@ -1,5 +1,7 @@
 # FlightTools Firefox Extension
 
+[![Discord](https://img.shields.io/badge/Discord-Join%20the%20server-5865F2?logo=discord&logoColor=white)](https://discord.gg/Qpxg4tZCc8)
+
 Firefox extension that adds a **Send to: SimPrinter / SimCallouts** choice to SimBrief's
 Takeoff/Landing Performance calculator. Pick SimPrinter and the calculation prints straight
 to whatever printer SimPrinter is configured to use; pick SimCallouts and its V1/VR values
