@@ -15,7 +15,7 @@
     link.textContent = "Sending...";
 
     browser.runtime
-      .sendMessage({ type: "simbrief-send", destination, text })
+      .sendMessage({ type: "flighttools-send", destination, text })
       .then((response) => {
         link.textContent = response && response.ok ? "Sent" : "Failed";
         if (response && !response.ok) console.warn("SimBrief send:", response.error);

@@ -2,7 +2,7 @@ const SIMPRINTER_URL = "http://127.0.0.1:39901/print-text";
 const SIMCALLOUTS_URL = "http://127.0.0.1:39902/import-text";
 
 browser.runtime.onMessage.addListener((message) => {
-  if (!message || message.type !== "simbrief-send") return;
+  if (!message || message.type !== "flighttools-send") return;
 
   const toSimCallouts = message.destination === "simcallouts";
   const url = toSimCallouts ? SIMCALLOUTS_URL : SIMPRINTER_URL;

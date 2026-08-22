@@ -3,10 +3,11 @@
 [![Discord](https://img.shields.io/badge/Discord-Join%20the%20server-5865F2?logo=discord&logoColor=white)](https://discord.gg/Qpxg4tZCc8)
 
 Firefox extension that adds a **Send to: SimPrinter / SimCallouts** choice to SimBrief's
-Takeoff/Landing Performance calculator. Pick SimPrinter and the calculation prints straight
-to whatever printer SimPrinter is configured to use; pick SimCallouts and its V1/VR values
-get pulled out and filled straight into SimCallouts's V1/Rotate fields - no more copy/paste
-either way.
+Takeoff/Landing Performance calculator, and a **Print** button to incoming ACARS messages on
+[fsm.vsrsoftware.com](https://fsm.vsrsoftware.com). Pick SimPrinter and the calculation
+prints straight to whatever printer SimPrinter is configured to use; pick SimCallouts and
+its V1/VR values get pulled out and filled straight into SimCallouts's V1/Rotate fields -
+no more copy/paste either way. ACARS messages just print, straight to SimPrinter.
 
 Used by [SimPrinter](https://github.com/matsan000/SimPrinter) and
 [SimCallouts](https://github.com/matsan000/SimCallouts), two companion apps for Microsoft
@@ -30,6 +31,11 @@ and prints it, SimCallouts parses V1/VR out of it and fills them in.
 Both servers only listen on `127.0.0.1` - nothing outside your own machine can reach them,
 and no data is collected, stored, or sent anywhere else by the extension itself.
 
+On fsm.vsrsoftware.com, opening an ACARS message (clicking it in the message list, or having
+one arrive) shows it full-screen in the site's own CDU-style display. A **PRINT** link
+appears in that display's header - click it and the message (with its time and from/to
+line) gets sent to SimPrinter the same way, reflowed and printed as-is.
+
 ## Installing (recommended)
 
 1. In SimPrinter, open **Settings -> Printer & General Settings** and turn on **"Allow the
@@ -44,19 +50,22 @@ This build is signed by Mozilla (submitted unlisted/self-distributed, not publis
 public store), so it installs normally and stays installed - no developer mode, no
 reloading it every time Firefox restarts.
 
-Once installed, the Send to: choice shows up in two places:
+Once installed, the Send to: choice shows up in two places on SimBrief:
 
 - The Takeoff/Landing Performance popup on a flight's briefing page - next to
   "Information" in the Calculation Output panel.
 - The standalone [Performance & Tools](https://dispatch.simbrief.com/tools) page - in the
   "Raw Output" view's header, next to the Formatted/Raw Output toggle.
 
+On fsm.vsrsoftware.com, the PRINT link shows up in the header of any opened ACARS message.
+
 ## Building and signing your own copy
 
 If you'd rather not trust a prebuilt binary, or you've made changes to the source:
 
-1. Zip up `manifest.json`, `background.js`, and `content.js` (root of the archive, not in
-   a subfolder) and rename it to `.xpi` - or just load the unzipped files directly for
+1. Zip up `manifest.json`, `background.js`, `content.js`, and `acars-content.js` (root of
+   the archive, not in a subfolder) and rename it to `.xpi` - or just load the unzipped
+   files directly for
    testing via `about:debugging#/runtime/this-firefox` -> **Load Temporary Add-on...**
    (lasts until Firefox restarts, no signing needed).
 2. For a permanent install, create a free account at
@@ -74,6 +83,7 @@ collects in `manifest.json` (`browser_specific_settings.gecko.data_collection_pe
 - `manifest.json` - extension manifest (Firefox, Manifest V2)
 - `content.js` - finds the calculation result on the SimBrief page and adds the Send to:
   widget
+- `acars-content.js` - adds the PRINT link to an opened ACARS message on fsm.vsrsoftware.com
 - `background.js` - routes the send to whichever app's local server was picked (content
   scripts are subject to the page's CSP, which can block a direct fetch to localhost; the
   background script isn't)

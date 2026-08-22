@@ -1,13 +1,18 @@
 {
   "manifest_version": 2,
   "name": "SimPrinter - SimBrief Performance Print",
-  "version": "1.1.0",
-  "description": "Adds a Send to: SimPrinter / SimCallouts choice to SimBrief's Takeoff/Landing Performance calculator - print the result or auto-fill V1/Rotate in SimCallouts.",
+  "version": "1.2.0",
+  "description": "Adds a Send to: SimPrinter / SimCallouts choice to SimBrief's Takeoff/Landing Performance calculator, and a Print button to incoming ACARS messages on fsm.vsrsoftware.com.",
   "permissions": ["http://127.0.0.1/*"],
   "content_scripts": [
     {
       "matches": ["*://dispatch.simbrief.com/*"],
       "js": ["content.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["*://fsm.vsrsoftware.com/*"],
+      "js": ["acars-content.js"],
       "run_at": "document_idle"
     }
   ],
